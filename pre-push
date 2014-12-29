@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+branch = `git rev-parse --abbrev-ref HEAD`.strip
+remote = `git config --get remote.origin.url`.strip
+repository = /:(.+)\.git$/.match(remote)[1]
+
+puts "-> https://github.com/#{repository}/compare/#{branch}"
+puts ""
+
