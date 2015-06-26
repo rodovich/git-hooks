@@ -1,5 +1,18 @@
 #!/usr/bin/env ruby
 
+root_directory = `git rev-parse --show-toplevel`.strip
+coffeelint_directories = ['app', 'spec'].map { |subdirectory| "#{root_directory}/#{subdirectory}" }
+IO.popen(['coffeelint'].concat(coffeelint_directories), 'r') do |io|
+  output = io.read
+  io.close
+  if $?.success?
+    puts 'coffeelint: ok'
+  else
+    puts output
+    exit $?.exitstatus
+  end
+end
+
 branch = `git rev-parse --abbrev-ref HEAD`.strip
 remote = `git config --get remote.origin.url`.strip
 repository = /:(.+)\.git$/.match(remote)[1]
