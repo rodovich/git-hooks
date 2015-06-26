@@ -1,0 +1,12 @@
+# git-hooks
+
+Pre-push
+  - Run `coffeelint` on the **app** and **spec** directories
+  - Print GitHub compare URL for the branch
+
+## Installation
+
+```
+rm -r /path/to/my-repository/.git/hooks
+ln -s /path/to/git-hooks/ /path/to/my-repository/.git/hooks
+```
