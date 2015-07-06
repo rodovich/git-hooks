@@ -4,6 +4,13 @@ Pre-push
   - Run `coffeelint` on the **app** and **spec** directories
   - Print GitHub compare URL for the branch
 
+## Requirements
+
+[CoffeeLint](http://www.coffeelint.org):
+```
+npm install -g coffeelint
+```
+
 ## Installation
 
 ```
