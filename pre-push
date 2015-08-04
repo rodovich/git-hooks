@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+local_ref = STDIN.read.split.take(1).first
+exit if local_ref == '(delete)'
+
 root_directory = `git rev-parse --show-toplevel`.strip
 coffeelint_directories = ['app', 'spec'].map { |subdirectory| "#{root_directory}/#{subdirectory}" }
 IO.popen(['coffeelint'].concat(coffeelint_directories), 'r') do |io|
