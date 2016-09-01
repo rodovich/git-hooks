@@ -6,12 +6,19 @@ exit if local_ref == '(delete)'
 root_directory = `git rev-parse --show-toplevel`.strip
 coffeelint_directories = ['app', 'spec'].map { |subdirectory| "#{root_directory}/#{subdirectory}" }
 IO.popen(['coffeelint'].concat(coffeelint_directories), 'r') do |io|
-  output = io.read
+  output = io.readlines
   io.close
   if $?.success?
     puts 'coffeelint: ok'
   else
-    puts output
+    for line in output
+      if l = line.match(/✗/)
+        unless line.match(/Lint\!/)
+          puts "\033[31m#{line}"
+        end
+      end
+    end
+    puts "\033[0m#{output[output.length - 2]}"
     exit $?.exitstatus
   end
 end
