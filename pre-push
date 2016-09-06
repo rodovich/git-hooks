@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# encoding: utf-8
 
 local_ref = STDIN.read.split.take(1).first
 exit if local_ref == '(delete)'
@@ -12,7 +13,7 @@ IO.popen(['coffeelint'].concat(coffeelint_directories), 'r') do |io|
     puts 'coffeelint: ok'
   else
     for line in output
-      if l = line.match(/✗/)
+      if line.match(/✗/)
         unless line.match(/Lint\!/)
           puts "\033[31m#{line}"
         end
@@ -29,4 +30,3 @@ repository = /:(.+)\.git$/.match(remote)[1]
 
 puts "-> https://github.com/#{repository}/compare/#{branch}"
 puts ""
-
