@@ -1,6 +1,9 @@
 # git-hooks
 
-Pre-push
+**Pre-commit**
+  - Prevent committing to `master` rather than a feature branch
+
+**Pre-push**
   - Run `coffeelint` on the **app** and **spec** directories
   - Print GitHub compare URL for the branch
 
